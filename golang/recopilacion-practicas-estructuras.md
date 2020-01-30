@@ -33,8 +33,8 @@
 - Las interfaces que especifican un sólo método suele agregarse la terminación 'er' a la misma (en inglés)
 - A la hora de crear tipos de errores deberían llamarse TipoError (ej. `type InvalidFileError struct {}`), los valores en cambio tienen la forma ErrorFoo (ej. `var ErrInvalidFile = ...`)
 - Los nombres de los packages deben poseer algún significado que demuestre su utilidad/función. Mantenerse alejado de `utils`, `commons`, etc.
-- Evitar mayúsculas en packages ya que no todos los file systems son case sensitive
-- Evitar stuttering (tartamudeo). Esto se puede evitar haciendo un paquete que implemente alguna estructura pública con el mismo nombre (ej. estructura `User` en paquete `user`, lo cual termina generando tartamudeo al llamar `user.User`)
+- Evitar mayúsculas en packages ya que no todos los file systems son case sensitive (ej. FAT32)
+- Evitar stuttering (tartamudeo). Esto se genera cuando un paquete que implemente alguna estructura pública con el mismo nombre (ej. estructura `User` en paquete `user`, lo cual termina generando tartamudeo al llamar `user.User`)
 - Los acrónimos deben ir en mayúscula (ej. `ServeHTTP`)
 - Ser consistente en el estilo a la hora de declarar variables. Ya que Golang permite varias formas de declarar una variable, intentar estandarizar una en un proyecto (aunque se sugiere que cuando se declara una variable pero no se inicializar usar el keyword `var` y `:=` para cuando se declare *e* inicialice,)
 
@@ -42,7 +42,7 @@
 
 ### Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>
 
-Golang posee una herramienta interna, que se recomienda usar antes de commitear cambios, para el formateo de código con las convenciones esperadas en el lenguaje. 
+Golang posee una herramienta interna, que se recomienda usar antes de commitear cambios, para el formateo de código con las convenciones esperadas en el lenguaje.
 [`gofmt`](https://golang.org/cmd/gofmt/) se puede utilizar tanto en Goland (Tools -> Go Tools -> GO Fmt File/Project) o desde la consola `gofmt [flags] [file o path]`.
 
 ***
