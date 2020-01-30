@@ -51,14 +51,14 @@ Golang posee una herramienta interna, que se recomienda usar antes de commitear 
 (Basado en https://github.com/golang-standards/project-layout)
 
 #### `/cmd` <a name="/cmd"></a>
-Esta carpeta almacena los archivos `main.go` de cada aplicación. El directorio de cada aplicación debe coincidir con el nombre del ejecutable que quieras obtener (`/cmd/aplicacion`).
+Esta carpeta **almacena los archivos `main.go` de cada aplicación**. El directorio de cada aplicación debe coincidir con el nombre del ejecutable que quieras obtener (`/cmd/aplicacion`).
 
-Se recomienda no poner demasiado código en este directorio. Si tiene código que se puede importar a otros proyectos, entonces debería estar en `/pkg`. Si el código no es reutilizable o no se quiere importar, se debería poner en `/internal`
+Se recomienda **no poner demasiado código en este directorio**. Si tiene código que se puede importar a otros proyectos, entonces debería estar en `/pkg`. Si el código no es reutilizable o no se quiere importar, se debería poner en `/internal`
 
 Para ver un ejemplo de diferentes aplicaciones en `/cmd`: https://github.com/Netflix/titus-executor/tree/master/cmd
 
 #### `/internal`
-Se utiliza a la hora de escribir código que no va a ser reutilizado ni importado (ya que es código que no puede ser visto afuera del root del proyecto). Es posible tener un proyecto en el cual sólo se use `/cmd` e `/internal`.
+Se utiliza a la hora de escribir **código que no va a ser reutilizado ni importado** (ya que es código que no puede ser visto afuera del root del proyecto). Es posible tener un proyecto en el cual sólo se use `/cmd` e `/internal`.
 
 También se le puede agregar una extra estructuctura para separar código interno compartido y código interno no compartido.
 
@@ -71,7 +71,7 @@ Proyecto que utiliza tanto `/cmd`e `/internal`, pero también `/pkg`: https://gi
 
 
 #### `/pkg`
-Código que puede ser compartido con otras aplicaciones. Otros proyectos pueden importar estas librerías y se asume que estas funcionan correctamente (hay que tener especial **cuidado con esto**). 
+Código que **puede ser compartido con otras aplicaciones**. Otros proyectos pueden importar estas librerías y se asume que estas funcionan correctamente (hay que tener especial **cuidado con esto**). 
 
 Podría considerarse correcto la no utilización de esta carpeta.
 
