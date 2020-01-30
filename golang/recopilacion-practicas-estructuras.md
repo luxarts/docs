@@ -26,7 +26,7 @@
 - Las variables deben usar un nombre corto (`i` para `index`, `r` para un `reader`)
 - No nombrar las variables con su tipo (ej. `usersMap`, sólamente usar `users`)
 - Evitar nombres redundantes, muchas veces repetidos en los nombres de las funciones (ej. conviene usar `contador` en lugar de `contadorLetras` como variable en una función que se llame `ContarLetras`)
-- Usar `ok` a la hora de buscar un key en un mapa para verificar que existe. Idem con los casteos.
+- Usar `ok` a la hora de buscar un key en un mapa para verificar que existe. Idem con los type assertion para verificar que el tipo es el indicado.
 - Los parámetros se comportan como las variables locales pero también funcionan como documentación. Cuando los tipos son descriptivos, los nombres de los parámetros deben ser cortos (ej. `func AddUser(u User)` en lugar de `func AddUser(user User)`). Cuando los tipos son ambiguos, los nombres pueden servir como documentación (ej. `func UpdateUsername(username string, userId int)`)
 - Los nombres en los retornos deben ser usados en funciones que se exporten sólo para documentación (ej. `func ReadFile(w Writer, r Reader) (documento string, err error)`)
 - Para los receivers el nombre tiene que ser consistente a lo largo de todos los métodos de ese tipo (el nombre de la variable debería ser igual) y, por lo general, debería ser uno o dos caracteres
