@@ -17,7 +17,7 @@
 
 ***
 
-### Naming conventions
+### Naming conventions
 
 (Basado en el slide de Andrew Gerrand -Google-): https://talks.golang.org/2014/names.slide#1)
 
