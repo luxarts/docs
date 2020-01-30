@@ -67,6 +67,7 @@ Ejemplo: La aplicación `autenticador-usuarios`, que es parte del conjunto `mi-a
 **El código dentro de internal no es compartido por Go, el mismo lenguaje fuerza esto.**
 
 Proyecto que utiliza sólo `/cmd` e `/internal`: https://github.com/satellity/satellity
+
 Proyecto que utiliza tanto `/cmd`e `/internal`, pero también `/pkg`: https://github.com/jaegertracing/jaeger
 
 
