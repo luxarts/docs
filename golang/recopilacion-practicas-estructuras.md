@@ -66,10 +66,16 @@ Ejemplo: La aplicación `autenticador-usuarios`, que es parte del conjunto `mi-a
 
 **El código dentro de internal no es compartido por Go, el mismo lenguaje fuerza esto.**
 
+Proyecto que utiliza sólo `/cmd` e `/internal`: https://github.com/satellity/satellity
+Proyecto que utiliza tanto `/cmd`e `/internal`, pero también `/pkg`: https://github.com/jaegertracing/jaeger
+
+
 #### `/pkg`
 Código que puede ser compartido con otras aplicaciones. Otros proyectos pueden importar estas librerías y se asume que estas funcionan correctamente (hay que tener especial **cuidado con esto**). 
 
 Podría considerarse correcto la no utilización de esta carpeta.
+
+Proyecto que utiliza sólo `/cmd` y `/pkg`: https://github.com/minio/minio
 
 #### `/vendor`
 
@@ -77,6 +83,8 @@ Dependencias de la aplicación. No comitear esta carpeta si estás armando una l
 
 #### `/api`
 Configuración de Swagger/OpenAPI, rules, etc
+
+Proyecto que utiliza `/api`: https://github.com/kubernetes/kubernetes/tree/master/api
 
 #### `/web`
 Elementos referidos a la web: templates, web assets, etc
@@ -95,7 +103,11 @@ Documentación y archivos relacionados a la misma.
 #### `/third_party`
 Herramientas externas, forks y otras utilidades 3rd party (ej. Swagger)
 
+#### `/scripts`
+Utilizado para diferentes tipos scripts. Por ejemplo, un bash script para ejecutar cURL.
+
+
 #### `/src`
-**Esta carpeta no es necesaria. No hay que confundirla con `/src` a nivel proyecto con el `/src` que usa Go como workspace.**
+**Esta carpeta no es necesaria y no debería crearse. No hay que confundirla con `/src` a nivel proyecto con el `/src` que usa Go como workspace.**
 
 ***
