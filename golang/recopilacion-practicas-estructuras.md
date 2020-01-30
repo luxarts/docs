@@ -1,6 +1,6 @@
 # Golang Standards
         
-- [Naming conventions](#naming-conventions)        
+- [Naming conventions](#naming-conventions)
 - [Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>](#formateo-de-código-con-gofmt-a-nameformateo-de-codigo-con-gofmta)        
 - [Estructura básica de un proyecto](#estructura-básica-de-un-proyecto)            
     - [`/cmd` <a name="/cmd"></a>](#cmd-a-namecmda)            
@@ -17,7 +17,11 @@
 
 ***
 
+<<<<<<< HEAD
 ### Naming conventions
+=======
+ ### Naming conventions
+>>>>>>> 4b7052f262bb6466b61dcb39c770a48d7b52fd59
 
 (Basado en el slide de Andrew Gerrand -Google-): https://talks.golang.org/2014/names.slide#1)
 
