@@ -4,11 +4,7 @@
 - [Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>](#formateo-de-código-con-gofmt-a-nameformateo-de-codigo-con-gofmta)        
 - [Estructura básica de un proyecto](#estructura-básica-de-un-proyecto)            
     - [`/cmd` <a name="/cmd"></a>](#cmd-a-namecmda)            
-<<<<<<< HEAD
     - [`/internal`](#internal)            
-=======
-    - [`/internal](#internal)            
->>>>>>> 52b05b295e3b1e40a86788c0857a1a49e3222d03
     - [`/pkg`](#pkg)            
     - [`/vendor`](#vendor)            
     - [`/api`](#api)            
@@ -59,11 +55,8 @@ Esta carpeta almacena los archivos `main.go` de cada aplicación. El directorio 
 
 Se recomienda no poner demasiado código en este directorio. Si tiene código que se puede importar a otros proyectos, entonces debería estar en `/pkg`. Si el código no es reutilizable o no se quiere importar, se debería poner en `/internal`
 
-<<<<<<< HEAD
 Para ver un ejemplo de diferentes aplicaciones en `/cmd`: https://github.com/Netflix/titus-executor/tree/master/cmd
 
-=======
->>>>>>> 52b05b295e3b1e40a86788c0857a1a49e3222d03
 #### `/internal`
 Se utiliza a la hora de escribir código que no va a ser reutilizado ni importado (ya que es código que no puede ser visto afuera del root del proyecto). Es posible tener un proyecto en el cual sólo se use `/cmd` e `/internal`.
 
@@ -104,8 +97,5 @@ Herramientas externas, forks y otras utilidades 3rd party (ej. Swagger)
 
 #### `/src`
 **Esta carpeta no es necesaria. No hay que confundirla con `/src` a nivel proyecto con el `/src` que usa Go como workspace.**
-<<<<<<< HEAD
 
 ***
-=======
->>>>>>> 52b05b295e3b1e40a86788c0857a1a49e3222d03
