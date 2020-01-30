@@ -4,7 +4,7 @@
 - [Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>](#formateo-de-código-con-gofmt-a-nameformateo-de-codigo-con-gofmta)        
 - [Estructura básica de un proyecto](#estructura-básica-de-un-proyecto)            
     - [`/cmd` <a name="/cmd"></a>](#cmd-a-namecmda)            
-    - [/internal](#internal)            
+    - [`/internal](#internal)            
     - [`/pkg`](#pkg)            
     - [`/vendor`](#vendor)            
     - [`/api`](#api)            
@@ -55,7 +55,7 @@ Esta carpeta almacena los archivos `main.go` de cada aplicación. El directorio 
 
 Se recomienda no poner demasiado código en este directorio. Si tiene código que se puede importar a otros proyectos, entonces debería estar en `/pkg`. Si el código no es reutilizable o no se quiere importar, se debería poner en `/internal`
 
-#### /internal
+#### `/internal`
 Se utiliza a la hora de escribir código que no va a ser reutilizado ni importado (ya que es código que no puede ser visto afuera del root del proyecto). Es posible tener un proyecto en el cual sólo se use `/cmd` e `/internal`.
 
 También se le puede agregar una extra estructuctura para separar código interno compartido y código interno no compartido.
