@@ -1,19 +1,20 @@
 # Golang Standards
-        
+
 - [Naming conventions](#naming-conventions)
-- [Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>](#formateo-de-código-con-gofmt-a-nameformateo-de-codigo-con-gofmta)        
-- [Estructura básica de un proyecto](#estructura-básica-de-un-proyecto)            
-    - [`/cmd` <a name="/cmd"></a>](#cmd-a-namecmda)            
-    - [`/internal`](#internal)            
-    - [`/pkg`](#pkg)            
-    - [`/vendor`](#vendor)            
-    - [`/api`](#api)            
-    - [`/web`](#web)            
-    - [`/configs`](#configs)            
-    - [`/test`](#test)            
-    - [`/docs`](#docs)            
-    - [`/third_party`](#third_party)            
-    - [`/src`](#src)
+- [Formateo de código con `gofmt` <a name="formateo-de-codigo-con-gofmt"></a>](#formateo-de-código-con-gofmt-a-nameformateo-de-codigo-con-gofmta)
+
+- [Estructura básica de un proyecto](#estructura-básica-de-un-proyecto)
+  - [`/cmd` <a name="/cmd"></a>](#cmd-a-namecmda)
+  - [`/internal`](#internal)
+  - [`/pkg`](#pkg)
+  - [`/vendor`](#vendor)
+  - [`/api`](#api)
+  - [`/web`](#web)
+  - [`/configs`](#configs)
+  - [`/test`](#test)
+  - [`/docs`](#docs)
+  - [`/third_party`](#third_party)
+  - [`/src`](#src)
 
 ***
 
@@ -51,6 +52,7 @@ Golang posee una herramienta interna, que se recomienda usar antes de commitear 
 (Basado en https://github.com/golang-standards/project-layout)
 
 #### `/cmd` <a name="/cmd"></a>
+
 Esta carpeta **almacena los archivos `main.go` de cada aplicación**. El directorio de cada aplicación debe coincidir con el nombre del ejecutable que quieras obtener (`/cmd/aplicacion`).
 
 Se recomienda **no poner demasiado código en este directorio**. Si tiene código que se puede importar a otros proyectos, entonces debería estar en `/pkg`. Si el código no es reutilizable o no se quiere importar, se debería poner en `/internal`
@@ -58,6 +60,7 @@ Se recomienda **no poner demasiado código en este directorio**. Si tiene códig
 Para ver un ejemplo de diferentes aplicaciones en `/cmd`: https://github.com/Netflix/titus-executor/tree/master/cmd
 
 #### `/internal`
+
 Se utiliza a la hora de escribir **código que no va a ser reutilizado ni importado** (ya que es código que no puede ser visto afuera del root del proyecto). Es posible tener un proyecto en el cual sólo se use `/cmd` e `/internal`.
 
 También se le puede agregar una extra estructuctura para separar código interno compartido y código interno no compartido.
@@ -72,6 +75,7 @@ Proyecto que utiliza tanto `/cmd`e `/internal`, pero también `/pkg`: https://gi
 
 
 #### `/pkg`
+
 Código que **puede ser compartido con otras aplicaciones**. Otros proyectos pueden importar estas librerías y se asume que estas funcionan correctamente (hay que tener especial **cuidado con esto**). 
 
 Podría considerarse correcto la no utilización de esta carpeta.
@@ -83,32 +87,40 @@ Proyecto que utiliza sólo `/cmd` y `/pkg`: https://github.com/minio/minio
 Dependencias de la aplicación. No comitear esta carpeta si estás armando una librería.
 
 #### `/api`
+
 Configuración de Swagger/OpenAPI, rules, etc
 
 Proyecto que utiliza `/api`: https://github.com/kubernetes/kubernetes/tree/master/api
 
 #### `/web`
+
 Elementos referidos a la web: templates, web assets, etc
 
 #### `/configs`
+
 Archivos de configuración
 
 #### `/test`
+
 Test externos y datos usados en tests. No hay una estructura definida para `/test`. 
 
 Es una buena práctica tenes un subdirectorio para los datos utilizados en tests, ej. `/test/data`.
 
 #### `/docs`
+
 Documentación y archivos relacionados a la misma.
 
 #### `/third_party`
+
 Herramientas externas, forks y otras utilidades 3rd party (ej. Swagger)
 
 #### `/scripts`
+
 Utilizado para diferentes tipos scripts. Por ejemplo, un bash script para ejecutar cURL.
 
 
 #### `/src`
+
 **Esta carpeta no es necesaria y no debería crearse. No hay que confundirla con `/src` a nivel proyecto con el `/src` que usa Go como workspace.**
 
 ***
