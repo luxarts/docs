@@ -17,13 +17,9 @@
 
 ***
 
-<<<<<<< HEAD
 ### Naming conventions
-=======
- ### Naming conventions
->>>>>>> 4b7052f262bb6466b61dcb39c770a48d7b52fd59
 
-(Basado en el slide de Andrew Gerrand -Google-): https://talks.golang.org/2014/names.slide#1)
+(Basado en el slide de Andrew Gerrand -Google- : https://talks.golang.org/2014/names.slide#1)
 
 - Los nombres en GO usan `MixedCase` (no se usan nombre_con_underscores)
 - Las variables deben usar un nombre corto (`i` para `index`, `r` para un `reader`)
