@@ -170,7 +170,7 @@ En el FS se vería de la siguiente manera:
  - No hay chances de "black-boxear", todo puede ser modificado por todo
  - No describe correctamente lo que hace la aplicación
  
- Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/flat
+ *Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/flat
 
 
 ## Alternativa 2 - Group by function
@@ -209,7 +209,7 @@ En el FS se vería de la siguiente manera:
 - No permite darle un contexto al modelo, por lo tanto sólo tendremos una sola definición. Ej. cuando se agrega una cerveza, usando la estructura de `cerveza` no deberíamos pasarle un Id, aunque la estructura lo tenga. Como usuario, es posible no saber que no sea necesario y, al ver que existe la propiedad, se genera la duda de si es necesario o no. 
 - No da muchas más ideas que la flat structure sobre lo que hace la aplicación
 
-Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/layered
+*Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/layered
 
 ***
 
@@ -283,7 +283,7 @@ Basado en "Implementing DDD" (Vaughn Vernon). Se basa en organizar las cosas de 
 
 - Es necesario comprender el contexto, lo cual no siempre sucede
 
-Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/domain
+*Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/domain
 
 ***
 
@@ -293,12 +293,12 @@ Separa las partes del dominio (core domain, lógica del negocio) y las dependenc
 
 La capa intermedia se encarga unir la lógica de negocio con las dependencias más externas, como por ejemplo convertir un request en un lenguaje que la capa de negocio pueda interpretar (o validar los campos antes de pasarlos al core). La capa de dominio va a convertir este input en un output y, la capa intermedia, se va a encargar de transformarla en lo que la capa más externa espera recibir. 
 
-La capa más externa trata a la aplicación una caja negra, no conoce nada sobre cómo funciona la aplicación. Puede entender cómo conectarse a la base de datos, realizar un llamado hacia alguna API, etc.
+La capa más externa trata a la aplicación como una caja negra, no conoce nada sobre cómo funciona la aplicación. Puede entender cómo conectarse a la base de datos, realizar un llamado hacia alguna API, etc.
 El objetivo: permite cambiar una parte de la aplicación sin tener que hacer grandes cambios.
 
 La regla de la arquitectura hexagonal es que las dependencias externas sólo pueden moverse hacia una capa interna del hexágono.
 Las capas externas no pueden contener lógica de negocio.
-En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exterior, no puede conocer de implementaciones externas. Esto nos obliga a usar interfaces e IoC.
+En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exterior, no puede conocer de implementaciones externas, etc; lo cual nos obliga a usar interfaces e IoC.
 
 
 ```json
@@ -342,10 +342,12 @@ En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exter
 
 - Para aplicaciones chicas puede considerarse demasiado
 
-Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/domain-hex
+*Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/domain-hex
 
 Video tutorial:
     - [Building Hexagonal Microservices with Go - Part One](https://www.youtube.com/watch?v=rQnTtQZGpg8)
+
     - [Building Hexagonal Microservices with Go - Part Two](https://www.youtube.com/watch?v=xUYDkiPdfWs)
+
     - [Building Hexagonal Microservices with Go - Part Three](https://www.youtube.com/watch?v=QyBXz9SpPqE)
 
