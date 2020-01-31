@@ -124,3 +124,228 @@ Utilizado para diferentes tipos scripts. Por ejemplo, un bash script para ejecut
 **Esta carpeta no es necesaria y no debería crearse. No hay que confundirla con `/src` a nivel proyecto con el `/src` que usa Go como workspace.**
 
 ***
+
+# Diferentes formas de estructurar apps
+
+(Basado en `GopherCon 2018: Kat Zien - How Do You Structure Your Go Apps` - https://www.youtube.com/watch?v=oL6JBUk6tj0)
+
+## Introducción
+
+El texto se basa en una GopherCon del año 2018. El ejemplo base se centra en un servicio de reviews de cerveza.
+Los casos de uso que debería contemplarse:
+
+- Los usuarios pueden agregar una cerveza
+- Los usuarios pueden agregar un review para una cerveza
+- Los usuarios pueden listar las cervezas
+- Los usuarios pueden listar los reviews para una cerveza en especial
+- Hay una opción de guardar data en memoria o en un JSON
+- Se debe poder agregar data de ejemplo
+
+## Alternativa 1 - Flat structure
+
+La primer estructura que presenta es `flat estructure`.
+
+En el FS se vería de la siguiente manera:
+```json
+/
+ |--- data.go: data de ejemplo
+ |--- handlers.go: HTTP handlers
+ |--- main.go: aplicación
+ |--- model.go: modelos de cerveza y review
+ |--- storage.go: define la funcionalidad del storage
+ |--- storage_json.go: implementación del storage
+ |--- storage_mem.go: implementación del storage
+ ```
+
+### Pros
+
+ - Fácil de navegar
+ - Buen comienzo para una aplicación, puede escalar a futuro
+ - Funciona bien para pequeños proyectos o librerías
+ - Funciona bien con la idiomática de Go (nice & simple)
+ - **No hay posibilidad de dependencias cíclicas**
+
+ ### Cons
+
+ - No hay chances de "black-boxear", todo puede ser modificado por todo
+ - No describe correctamente lo que hace la aplicación
+ 
+ Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/flat
+
+
+## Alternativa 2 - Group by function
+
+ Comunmente conocida como `layered architecture`, la cual se separa en 3 capas diferentes:
+ 
+ - UI / Presentation
+ - Business logic
+ - Dependencias + Infraestructura
+
+```json
+/
+ |--- data.go
+ |--- handlers
+ |  |--- cervezas.go
+ |  |--- reviews.go
+ |--- main.go
+ |--- models
+ |  |--- cerveza.go
+ |  |--- review.go
+ |  |--- storage.go
+ |--- storage
+    |--- json.go
+    |--- memory.go
+```
+
+### Pros
+
+- Fácil para determinar dónde va cada cosa
+- Fuerza el concepto de agrupar cosas relevantes en un mismo paquete
+
+### Cons
+
+- Si una variable se comparte en múltiples layers hay que saber determinar en qué lugar va a ser implementada o decidir si simplemente hay que duplicarla
+- ¿Dónde se inicializan las cosas?
+- No permite darle un contexto al modelo, por lo tanto sólo tendremos una sola definición. Ej. cuando se agrega una cerveza, usando la estructura de `cerveza` no deberíamos pasarle un Id, aunque la estructura lo tenga. Como usuario, es posible no saber que no sea necesario y, al ver que existe la propiedad, se genera la duda de si es necesario o no. 
+- No da muchas más ideas que la flat structure sobre lo que hace la aplicación
+
+Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/layered
+
+***
+
+## Alternativa 3 - Group by module
+
+```json
+/
+ |--- cervezas
+ |  |--- cerveza.go
+ |  |--- handler.go
+ |--- reviews
+ |  |--- handler.go
+ |  |--- review.go
+ |--- main.go
+ |--- storage
+ |  |--- data.go
+ |  |--- json.go
+ |  |--- memory.go
+ |  |--- storage.go
+```
+
+### Pros
+
+- Se evita de forma más fácil la dependencia cíclica
+- Se agrupa por lógica
+
+### Cons
+
+- Sigue siendo dificil de determinar la función de la aplicación
+- Stuttering / tartamudeo, ya que el paquete `cervezas` tiene un struct `Cerveza`, lo cual genera `cerveza.Cerveza`
+
+***
+
+## Alternativa 4 - Group by context
+
+Basado en "Implementing DDD" (Vaughn Vernon). Se basa en organizar las cosas de una forma más natural.
+
+¿Qué es DDD y cómo funciona?
+
+- Obliga a pensar en el dominio y el negocio antes de codear
+- Cada contexto tiene su modelo con sus propios límites (ej. una aplicación que tiene un `usuario` como entidad, en el contexto de `venta` un `usuario` puede tener propiedades como `costoadquisicion`; pero en el contexto de `cx`, puede tener campos como `tiemporespuesta` o `ticketsabiertos`)
+
+```json
+/
+ |--- agregar
+ |  |--- endpoint.go
+ |  |--- service.go
+ |--- cervezas
+ |  |--- cerveza.go
+ |--- listado
+ |  |--- endpoint.go
+ |  |--- service.go
+ |--- main.go
+ |--- opinar
+ |  |--- endpoint.go
+ |  |--- service.go
+ |--- reviews
+ |  |--- review
+ |--- storage
+ |  |--- json.go
+ |  |--- memory.go
+ |  |--- type.go
+```
+
+### Pros
+
+- Ayuda a entender el contexto y qué es cada cosa
+- Evita las dependencias cíclicas
+
+### Cons
+
+- Es necesario comprender el contexto, lo cual no siempre sucede
+
+Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/domain
+
+***
+
+## Alternativa 5 - Hexagonal architecture
+
+Separa las partes del dominio (core domain, lógica del negocio) y las dependencias externas. En el centro de nuestra aplicación se encuentra la lógica del negocio. 
+
+La capa intermedia se encarga unir la lógica de negocio con las dependencias más externas, como por ejemplo convertir un request en un lenguaje que la capa de negocio pueda interpretar (o validar los campos antes de pasarlos al core). La capa de dominio va a convertir este input en un output y, la capa intermedia, se va a encargar de transformarla en lo que la capa más externa espera recibir. 
+
+La capa más externa trata a la aplicación una caja negra, no conoce nada sobre cómo funciona la aplicación. Puede entender cómo conectarse a la base de datos, realizar un llamado hacia alguna API, etc.
+El objetivo: permite cambiar una parte de la aplicación sin tener que hacer grandes cambios.
+
+La regla de la arquitectura hexagonal es que las dependencias externas sólo pueden moverse hacia una capa interna del hexágono.
+Las capas externas no pueden contener lógica de negocio.
+En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exterior, no puede conocer de implementaciones externas. Esto nos obliga a usar interfaces e IoC.
+
+
+```json
+|--- cmd
+|   |--- servidor
+|   |   |--- main.go
+|--- pkg
+|   |--- agregar
+|   |   |--- cerveza.go
+|   |   |--- service.go
+|   |--- http
+|   |   |--- rest
+|   |   |   |--- handler.go
+|   |--- listar
+|   |   |--- cerveza.go
+|   |   |--- review.go
+|   |   |--- service.go
+|   |--- opinar
+|   |   |--- review.go
+|   |   |--- service.go
+|   |--- storage
+|   |   |--- json
+|   |   |   |--- cerveza.go
+|   |   |   |--- repositorio.go
+|   |   |   |--- review.go
+|   |   |--- memory
+|   |   |   |--- cerveza.go
+|   |   |   |--- repositorio.go
+|   |   |   |--- review.go
+```
+
+### Pros
+
+- Permite escalar
+- Permite intercambiar implementaciones sin problema alguno
+- Cada modelo tiene su propio contexto
+- Permite determinar el objetivo de la aplicación
+- Reutilización de lógica de negocio en diferentes contextos
+
+### Cons
+
+- Para aplicaciones chicas puede considerarse demasiado
+
+Repositorio de ejemplo: https://github.com/katzien/go-structure-examples/tree/master/domain-hex
+
+Video tutorial:
+    - [Building Hexagonal Microservices with Go - Part One](https://www.youtube.com/watch?v=rQnTtQZGpg8)
+    - [Building Hexagonal Microservices with Go - Part Two](https://www.youtube.com/watch?v=xUYDkiPdfWs)
+    - [Building Hexagonal Microservices with Go - Part Three](https://www.youtube.com/watch?v=QyBXz9SpPqE)
+
