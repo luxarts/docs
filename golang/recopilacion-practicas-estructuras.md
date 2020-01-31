@@ -241,6 +241,8 @@ En el FS se vería de la siguiente manera:
 - Sigue siendo dificil de determinar la función de la aplicación
 - Stuttering / tartamudeo, ya que el paquete `cervezas` tiene un struct `Cerveza`, lo cual genera `cerveza.Cerveza`
 
+*Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/modular
+
 ***
 
 ## Alternativa 4 - Group by context
