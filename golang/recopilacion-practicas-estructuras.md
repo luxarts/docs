@@ -16,6 +16,8 @@
   - [`/third_party`](#third_party)
   - [`/src`](#src)
 
+- [Diferentes formas de estructurar apps](#diferentes-formas-de-estructurar-apps)
+
 ***
 
 ### Naming conventions
@@ -346,10 +348,21 @@ En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exter
 
 *Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/domain-hex
 
-Video tutorial:
-    - [Building Hexagonal Microservices with Go - Part One](https://www.youtube.com/watch?v=rQnTtQZGpg8)
+## Video tutorial:
 
-    - [Building Hexagonal Microservices with Go - Part Two](https://www.youtube.com/watch?v=xUYDkiPdfWs)
+- [Building Hexagonal Microservices with Go - Part One](https://www.youtube.com/watch?v=rQnTtQZGpg8)
 
-    - [Building Hexagonal Microservices with Go - Part Three](https://www.youtube.com/watch?v=QyBXz9SpPqE)
+- [Building Hexagonal Microservices with Go - Part Two](https://www.youtube.com/watch?v=xUYDkiPdfWs)
 
+- [Building Hexagonal Microservices with Go - Part Three](https://www.youtube.com/watch?v=QyBXz9SpPqE)
+
+***
+
+## Repositorios de ejemplo
+
+- https://github.com/google/mtail
+- https://github.com/google/ko - Buen ejemplo del uso de las carpetas mencionadas previamente
+- https://github.com/kubernetes/kubernetes
+- https://github.com/AkbaraliShaikh/denti/tree/master/pkg - Muy buen ejemplo de hexagonal architecture
+- https://github.com/maclav3/cleanarch-hegaxon-demo
+- https://github.com/iDevoid/stygis y https://medium.com/@iDevoid/stygis-golang-hexagonal-architecture-a2d89d01f84b
