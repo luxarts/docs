@@ -347,6 +347,7 @@ En cambio, el dominio no puede hacer referencia de ninguna manera hacia el exter
 - Para aplicaciones chicas puede considerarse demasiado
 
 *Repositorio de ejemplo:* https://github.com/katzien/go-structure-examples/tree/master/domain-hex
+*Repositorio de ejemplo 2*: https://github.com/AkbaraliShaikh/denti
 
 ## Video tutorial:
 
